@@ -8,6 +8,8 @@ static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Source Code Pro:size=24" };
 static const char dmenufont[]       = "Source Code Pro:size=24";
 static const char dmenu_list_size[] = "25";
+static const char volume_up_cmd[]   = "pulseaudio-ctl up";
+static const char volume_down_cmd[] = "pulseudio-ctl down";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
