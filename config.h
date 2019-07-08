@@ -7,6 +7,10 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Source Code Pro:size=24" };
 static const char dmenufont[]       = "Source Code Pro:size=24";
+static const char dmenu_list_size[] = "25";
+static const char *volume_up_cmd[]  = {"pulseaudio-ctl", "up", "5", NULL};
+static const char *volume_down_cmd[]= {"pulseaudio-ctl", "down", "5", NULL};
+static const char *volume_mute_cmd[]= {"pulseaudio-ctl", "mute", NULL};
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -18,19 +22,23 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
-static const char dmenu_list_length[] = "5";
+static const char dmenu_list_length[] = "7";
+/* Put custom keys here */
+#define XF86AudioRaiseVolume 0x1008ff13
+#define XF86AudioLowerVolume 0x1008ff11
+#define XF86AudioMute 0x1008ff12
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-static const Rule rules[] = {
+static const Rule rules[] = {{"", NULL, NULL, 0, 0, -1}};
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-};
+//	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+//	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 
 /* layout(s) */
 static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
@@ -57,13 +65,21 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+<<<<<<< HEAD
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", dmenu_list_length, NULL };
+=======
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", dmenu_list_size, NULL};
+>>>>>>> 6911a1235be2e3a01c617f5429d460bf78b480b5
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+<<<<<<< HEAD
 	{ MODKEY, 			            XK_Return, spawn,          {.v = termcmd } },
+=======
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+>>>>>>> 6911a1235be2e3a01c617f5429d460bf78b480b5
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -95,6 +111,9 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
+    { 0,                            XF86AudioRaiseVolume, spawn, {.v = volume_up_cmd} },
+    { 0,                            XF86AudioLowerVolume, spawn, {.v = volume_down_cmd} },
+    { 0,                            XF86AudioMute,        spawn, {.v = volume_mute_cmd} },
 };
 
 /* button definitions */
