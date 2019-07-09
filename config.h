@@ -6,11 +6,8 @@ static const unsigned int snap      = 0;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Source Code Pro:size=24" };
-static const char dmenufont[]       = "Source Code Pro:size=24";
+static const char dmenufont[]       = "Source Code Pro:size=30";
 static const char dmenu_list_size[] = "25";
-static const char *volume_up_cmd[]  = {"pulseaudio-ctl", "up", "5", NULL};
-static const char *volume_down_cmd[]= {"pulseaudio-ctl", "down", "5", NULL};
-static const char *volume_mute_cmd[]= {"pulseaudio-ctl", "mute", NULL};
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -21,11 +18,6 @@ static const char *colors[][3]      = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
-
-/* Put custom keys here */
-#define XF86AudioRaiseVolume 0x1008ff13
-#define XF86AudioLowerVolume 0x1008ff11
-#define XF86AudioMute 0x1008ff12
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -102,9 +94,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
-    { 0,                            XF86AudioRaiseVolume, spawn, {.v = volume_up_cmd} },
-    { 0,                            XF86AudioLowerVolume, spawn, {.v = volume_down_cmd} },
-    { 0,                            XF86AudioMute,        spawn, {.v = volume_mute_cmd} },
 };
 
 /* button definitions */
