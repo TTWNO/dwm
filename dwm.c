@@ -1603,6 +1603,9 @@ setup(void)
 	XChangeWindowAttributes(dpy, root, CWEventMask|CWCursor, &wa);
 	XSelectInput(dpy, root, wa.event_mask);
 	grabkeys();
+	// patched in by me to auto set bar to not visible
+	togglebar(0);
+	
 	focus(NULL);
 }
 
